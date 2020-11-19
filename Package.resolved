@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Subprocess",
+        "repositoryURL": "https://github.com/jamf/Subprocess",
+        "state": {
+          "branch": null,
+          "revision": "4eae51a9c3acd11b908204997b0fcde53f243c6d",
+          "version": "1.1.0"
+        }
+      },
+      {
         "package": "swift-argument-parser",
         "repositoryURL": "https://github.com/apple/swift-argument-parser",
         "state": {

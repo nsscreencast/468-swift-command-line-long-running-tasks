@@ -10,14 +10,16 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "0.3.1"),
-        .package(url: "https://github.com/JohnSundell/Files", from: "4.1.1")
+        .package(url: "https://github.com/JohnSundell/Files", from: "4.1.1"),
+        .package(url: "https://github.com/jamf/Subprocess", from: "1.1.0")
     ],
     targets: [
         .target(
             name: "swift-encode",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
-                .product(name: "Files", package: "Files")
+                .product(name: "Files", package: "Files"),
+                .product(name: "Subprocess", package: "Subprocess")
             ]),
         .testTarget(
             name: "swift-encodeTests",

@@ -19,35 +19,12 @@ struct Encode: ParsableCommand {
         try ANSIColor.with(.yellow) {
             let file = try File(path: inputFile)
             _ = try Folder.current.createSubfolderIfNeeded(withName: outputDirectory)
-            cmd("ffprobe", file.path)
+            let video = Video(file: file)
+            print("Frames: \(try video.totalFrames())")
+            let encoder = Encoder(video: video)
+            try encoder.encode()
+            print("Done!")
         }
-    }
-    
-    @discardableResult
-    func cmd(_ command: String, _ arguments: String...) -> Int32 {
-        let stdout = Pipe()
-        let stderr = Pipe()
-    
-        let task = Process()
-        task.standardOutput = stdout
-        task.standardError = stderr
-        task.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        task.arguments = [command] + arguments
-        task.launch()
-        
-        task.waitUntilExit()
-        
-        func pipeToString(_ pipe: Pipe) -> String {
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            return String(data: data, encoding: .utf8)!
-        }
-        
-        print("------STDOUT------")
-        print(pipeToString(stdout))
-        print("------STDERR------")
-        print(pipeToString(stderr))
-        
-        return task.terminationStatus
     }
 }
 
